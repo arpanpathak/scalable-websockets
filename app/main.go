@@ -2,19 +2,20 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/scalable-websocket/app/controller"
 )
 
 func main() {
 	// get the appId from the environment variable
-	appPort := ":8081"
+	appPORT := os.Getenv("APPPORT")
 
 	http.HandleFunc("/echo", controller.WebSocketHandler)
 
 	http.HandleFunc("/", controller.HandleStaticFile)
 
-	if err := http.ListenAndServe(appPort, nil); err != nil {
+	if err := http.ListenAndServe(appPORT, nil); err != nil {
 		panic(err)
 	}
 }
