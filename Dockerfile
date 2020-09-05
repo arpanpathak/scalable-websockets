@@ -1,37 +1,12 @@
-FROM golang:alpine
+FROM golang:1.14
 
 # Set necessary environmet variables needed for our image
-ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux \
-    GOARCH=amd64\
-    APPPORT=8081\
-    REDIS_HOST=192.168.99.100\
-    REDIS_PORT=6379\
-    REDIS_PASSWORD=hackredis
+ENV APPPORT=8081\
+    REDIS_HOST=redis\
+    REDIS_PORT=6379
 
-# Move to working directory /build
-WORKDIR /app
 
-# Copy and download dependency using go mod
-COPY go.mod .
-COPY go.sum .
+WORKDIR /home/app/dist
+COPY app /home/app/dist
 RUN go mod download
-
-# Copy the code into the container
-COPY . .
-
-# Build the application
-RUN go build -o main .
-
-# Move to /dist directory as the place for resulting binary folder
-WORKDIR /dist
-
-# Copy binary from build to main folder
-RUN cp /build/main .
-
-# Export necessary port
-EXPOSE 8081
-
-# Command to run when starting the container
-CMD ["/dist/main"]
+CMD ./app

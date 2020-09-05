@@ -11,7 +11,7 @@ func main() {
 	// get the appId from the environment variable
 	appPORT := os.Getenv("APPPORT")
 
-	http.HandleFunc("/echo", controller.WebSocketHandler)
+	http.HandleFunc("/ws", controller.WebSocketHandler)
 
 	http.HandleFunc("/", controller.HandleStaticFile)
 
