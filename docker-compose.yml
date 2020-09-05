@@ -12,7 +12,7 @@ services:
         environment:
             - APPID=1111
             - APPPORT=8080
-            - REDIS_HOST=redis
+            - REDIS_HOST=rds
             - REDIS_PORT=6379
 
     ws2:
@@ -20,21 +20,21 @@ services:
         environment:
             - APPID=2222
             - APPPORT=8080
-            - REDIS_HOST=redis
+            - REDIS_HOST=rds
             - REDIS_PORT=6379
     ws3:
         image: app
         environment:
             - APPID=3333
             - APPPORT=8080
-            - REDIS_HOST=redis
+            - REDIS_HOST=rds
             - REDIS_PORT=6379
     ws4:
         image: app
         environment:
             - APPID=4444
             - APPPORT=8080
-            - REDIS_HOST=redis
+            - REDIS_HOST=rds
             - REDIS_PORT=6379
     rds:
         image: redis

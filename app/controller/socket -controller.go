@@ -16,9 +16,11 @@ var upgrader = websocket.Upgrader{
 
 // WebSocketHandler handle websocket requests
 func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Printf("New upgrade hader request.........")
+
 	// Upgrade HTTP 1.1 request to a websocket connection
 	conn, err := upgrader.Upgrade(w, r, nil)
-
 	// Panic the error
 	if err != nil {
 		panic(err)
