@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <!-- websocketSlient.html -->
+
+    <div class = "chat-container">
+        <input id="input" type="text" />
+        <button onclick="send()" id ="send">Send</button>
+    </div>
+    
+    <div class = "output-container">
+        <pre id="output"></pre>
+    </div>
+
+    <script>
+        var input = document.getElementById("input");
+        var output = document.getElementById("output");
+        var socket = new WebSocket("ws://localhost:8081/echo");
+
+        socket.onopen = function () {
+            output.innerHTML += "Status: Connected\n";
+        };
+
+        socket.onmessage = function (e) {
+            output.innerHTML += "Server: " + e.data + "\n";
+        };
+
+        function send() {
+            socket.send(input.value);
+            input.value = "";
+        }
+    </script>
+
+    <style>
+        .chat-container {
+            margin-left: 10%;
+            margin-right: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 1px solid lightcoral;
+    
+        }
+
+        .output-container {
+            margin-left: 10%;
+            margin-right: 10%;
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            padding: 10px;
+            border: 0.002em solid lightcoral;
+    
+        }
+
+
+        #input {
+            flex: 5;
+            border: 0.04em solid#1E88E5;
+            padding: 10px;
+
+        }
+
+        #send {
+            border: 1px solid darkgrey;
+            background: #1E88E5;
+            color: #fff;
+            padding: 10px;
+            flex: 1;
+        }
+
+    </style>
+
+</html>
+
